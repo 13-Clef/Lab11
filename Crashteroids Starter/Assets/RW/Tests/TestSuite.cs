@@ -47,6 +47,31 @@ namespace Tests
             Object.Destroy(game.gameObject);
         }
 
+        [SetUp]
+        public void Setup()
+        {
+            GameObject gameGameObject =
+                MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
+            game = gameGameObject.GetComponent<Game>();
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            Object.Destroy(game.gameObject);
+        }
+
+        [UnityTest]
+        public IEnumerator NewGameRestartsGame()
+        {
+            //1
+            game.isGameOver = true;
+            game.NewGame();
+            //2
+            Assert.False(game.isGameOver);
+            yield return null;
+        }
+
 
     }
 }
