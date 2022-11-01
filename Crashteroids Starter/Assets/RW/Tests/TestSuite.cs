@@ -72,6 +72,18 @@ namespace Tests
             yield return null;
         }
 
+        [UnityTest]
+        public IEnumerator LaserMovesUp()
+        {
+            // 1
+            GameObject laser = game.GetShip().SpawnLaser();
+            // 2
+            float initialYPos = laser.transform.position.y;
+            yield return new WaitForSeconds(0.1f);
+            // 3
+            Assert.Greater(laser.transform.position.y, initialYPos);
+        }
+
 
     }
 }
